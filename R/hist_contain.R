@@ -6,6 +6,8 @@
 #' @export
 #'
 #' @importFrom magrittr %>%
+#' @importFrom dplyr filter
+#' @importFrom stringr str_detect fixed
 #'
 #' @examples
 #' # Example source dataframe created with hist_sources
