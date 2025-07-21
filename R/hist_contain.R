@@ -1,11 +1,12 @@
 #' Filter the source dataframe by the occurrence of different words
 #'
-#' @param "words" - The words for which the source dataframe should be filtered
-#' @returns the filtered source dataframe
+#' @param data A dataframe (from `hist_sources`) with a `text` column to be filtered and output_text = FALSE in the hist_sources function.
+#' @returns ... One or more character strings to search for. Use `+` to require multiple words in the same text (e.g., `"king+battle"`). Multiple arguments represent an OR condition.
+#' @return A filtered dataframe containing only the rows where the text column matches the given word criteria.
 #' @export
 #'
 #' @examples
-#' # Before using hist_cotain, you should have created a dataframe containing the sources you want to examine. To do this, you must have used hist_sources, where output_text must not be set to TRUE.
+#' # Example source dataframe created with hist_sources
 #' Xenophon_Corinthian <- hist_sources(author="Xenophon",context="Corinthian War", output_text = FALSE)
 #'
 #' # Filter a source dataframe for sources that contain one specific word, e.g., "king"
