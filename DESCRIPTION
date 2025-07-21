@@ -2,7 +2,7 @@ Package: historical
 Title: Facilitate work with primary sources of history in R
 Version: 0.0.0.9000
 Authors@R: 
-    person("Anton", "Szimmat", "anton.szimmat@campus.lmu.de", role = c("aut", "cre"))
+    person("Anton", "Szimmat", , "anton.szimmat@campus.lmu.de", role = c("aut", "cre"))
 Description: This package provides functions to facilitate efficient work with primary sources of history in R.
 License: Apache License (>= 2)
 Encoding: UTF-8
