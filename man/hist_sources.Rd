@@ -11,7 +11,8 @@ hist_sources(
   event = NULL,
   work = NULL,
   citation = NULL,
-  output_text = FALSE
+  output_text = FALSE,
+  source_data = the_sources
 )
 }
 \arguments{
