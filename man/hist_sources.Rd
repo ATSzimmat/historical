@@ -2,7 +2,7 @@
 % Please edit documentation in R/hist_sources.R
 \name{hist_sources}
 \alias{hist_sources}
-\title{Create source dataframe nach Wunsch}
+\title{Erzeuge ein gefiltertes Quellen-DataFrame}
 \usage{
 hist_sources(
   author = NULL,
@@ -11,34 +11,35 @@ hist_sources(
   event = NULL,
   work = NULL,
   citation = NULL,
-  output_text = FALSE,
-  source_data = the_sources
+  output_text = FALSE
 )
 }
 \arguments{
-\item{author}{Der Autor nach die Quellen gefiltert werden sollen}
+\item{author}{Der Autor, nach dem die Quellen gefiltert werden sollen (z.B. "Xenophon")}
 
-\item{context}{Der Kontext nach dem die Quellen gefiltert werden sollen}
+\item{context}{Der historische Kontext (z.B. "Corinthian War")}
 
-\item{event_type}{Der Art des Ereignisses nach dem die Quellen gefiltert werden sollen}
+\item{event_type}{Der Typ des Ereignisses (z.B. "battle")}
 
-\item{event}{Das Ereignis nach dem die Quellen gefiltert werden sollen}
+\item{event}{Das spezifische Ereignis (z.B. "Leuctra")}
 
-\item{work}{Das Werk nach dem die Quellen gefiltert weden sollen}
+\item{work}{Das Werk (z.B. "Hellenika")}
 
-\item{citation}{Die Zitation nach der die Quellen gefiltert werden sollen}
+\item{citation}{Die Zitation (z.B. "1.1.1")}
 
-\item{output_text}{Möglichkeit sich den gerenderten Text der Quellen ausgeben zu lassen}
+\item{output_text}{Wenn \code{TRUE}, wird der Ergebnistext formatiert in der Konsole ausgegeben}
 }
 \value{
-die gewünschten Quellenstellen als DataFrame
+Ein gefiltertes DataFrame mit Quellenstellen (sofern \code{output_text = FALSE})
 }
 \description{
-Create source dataframe nach Wunsch
+Diese Funktion filtert das interne Datenset \code{the_sources} nach den angegebenen Parametern.
+Falls \code{output_text = TRUE}, wird der Ergebnistext formatiert als Ausgabe in der Konsole dargestellt.
 }
 \examples{
 # Alle Quellenstellen von Xenophon über den Korinthischen Krieg als DataFrame
-Xenophon_Corinthian <- hist_sources(author="Xenophon",context="Corinthian War", output_text=FALSE)
-# Alle Quellenstellen von Xenophon über den Korinthischen Krieg als Text
-Xenophon_Corinthian <- hist_sources(author="Xenophon",context="Corinthian War", output_text=TRUE)
+Xenophon_Corinthian <- hist_sources(author = "Xenophon", context = "Corinthian War")
+
+# Als formatierter Text
+hist_sources(author = "Xenophon", context = "Corinthian War", output_text = TRUE)
 }
