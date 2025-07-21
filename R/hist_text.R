@@ -17,4 +17,3 @@ hist_text <- function(filtered_sources) {
   )
   cat(paste(formatted, collapse = "\n\n"))
 }
-
