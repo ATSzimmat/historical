@@ -1,3 +1,14 @@
+#' Title
+#'
+#' @param data
+#' @param ...
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+#'
+#'
 hist_contain <- function(data, ...) {
   words <- c(...)
   make_filter <- function(entry) {
