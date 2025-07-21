@@ -7,7 +7,7 @@
 hist_text(filtered_sources)
 }
 \arguments{
-\item{filtered_sources}{Automatisch von hist_sources generierter Platzhaltername für das source dataframe}
+\item{filtered_sources}{Automatically von hist_sources generierter Platzhaltername für das source dataframe}
 }
 \value{
 The rendered text of the sources of the respective source dataframe (so the source-paper)
