@@ -1,54 +1,59 @@
-#' Create source dataframe nach Wunsch
+#' Erzeuge ein gefiltertes Quellen-DataFrame
 #'
-#' @param author Der Autor nach die Quellen gefiltert werden sollen
-#' @param context Der Kontext nach dem die Quellen gefiltert werden sollen
-#' @param event_type Der Art des Ereignisses nach dem die Quellen gefiltert werden sollen
-#' @param event Das Ereignis nach dem die Quellen gefiltert werden sollen
-#' @param work Das Werk nach dem die Quellen gefiltert weden sollen
-#' @param citation Die Zitation nach der die Quellen gefiltert werden sollen
-#' @param output_text Möglichkeit sich den gerenderten Text der Quellen ausgeben zu lassen
+#' Diese Funktion filtert das interne Datenset \code{the_sources} nach den angegebenen Parametern.
+#' Falls \code{output_text = TRUE}, wird der Ergebnistext formatiert als Ausgabe in der Konsole dargestellt.
 #'
-#' @returns die gewünschten Quellenstellen als DataFrame
+#' @param author Der Autor, nach dem die Quellen gefiltert werden sollen (z.B. "Xenophon")
+#' @param context Der historische Kontext (z.B. "Corinthian War")
+#' @param event_type Der Typ des Ereignisses (z.B. "battle")
+#' @param event Das spezifische Ereignis (z.B. "Leuctra")
+#' @param work Das Werk (z.B. "Hellenika")
+#' @param citation Die Zitation (z.B. "1.1.1")
+#' @param output_text Wenn \code{TRUE}, wird der Ergebnistext formatiert in der Konsole ausgegeben
+#'
+#' @return Ein gefiltertes DataFrame mit Quellenstellen (sofern \code{output_text = FALSE})
 #' @export
 #'
 #' @examples
 #' # Alle Quellenstellen von Xenophon über den Korinthischen Krieg als DataFrame
-#' Xenophon_Corinthian <- hist_sources(author="Xenophon",context="Corinthian War", output_text=FALSE)
-#' # Alle Quellenstellen von Xenophon über den Korinthischen Krieg als Text
-#' Xenophon_Corinthian <- hist_sources(author="Xenophon",context="Corinthian War", output_text=TRUE)
+#' Xenophon_Corinthian <- hist_sources(author = "Xenophon", context = "Corinthian War")
+#'
+#' # Als formatierter Text
+#' hist_sources(author = "Xenophon", context = "Corinthian War", output_text = TRUE)
 hist_sources <- function(
-    author = NULL, context = NULL, event_type = NULL, event = NULL, work = NULL,
-    citation = NULL, output_text = FALSE, source_data = the_sources)
-{
-  filtered_sources <- source_data
+    author = NULL,
+    context = NULL,
+    event_type = NULL,
+    event = NULL,
+    work = NULL,
+    citation = NULL,
+    output_text = FALSE
+) {
+  data <- the_sources
 
   if (!is.null(author)) {
-    filtered_sources <- dplyr::filter(filtered_sources, .data$author == author)
+    data <- data[data$author == author, ]
   }
   if (!is.null(context)) {
-    filtered_sources <- dplyr::filter(filtered_sources, .data$context == context)
+    data <- data[data$context == context, ]
   }
   if (!is.null(event_type)) {
-    filtered_sources <- dplyr::filter(filtered_sources, .data$event_type == event_type)
+    data <- data[data$event_type == event_type, ]
   }
   if (!is.null(event)) {
-    filtered_sources <- dplyr::filter(filtered_sources, .data$event == event)
+    data <- data[data$event == event, ]
   }
   if (!is.null(work)) {
-    filtered_sources <- dplyr::filter(filtered_sources, .data$work == work)
+    data <- data[data$work == work, ]
   }
   if (!is.null(citation)) {
-    filtered_sources <- dplyr::filter(filtered_sources, .data$citation == citation)
+    data <- data[data$citation == citation, ]
   }
 
   if (output_text) {
-    output <- dplyr::mutate(
-      filtered_sources,
-      formatted = glue::glue("{text_ID} – {citation}\n{trimws(text)}")
-    ) |>
-      dplyr::pull(formatted)
+    output <- paste0(data$text_ID, " – ", data$citation, "\n", trimws(data$text))
     cat(paste(output, collapse = "\n\n"))
   } else {
-    return(filtered_sources)
+    return(data)
   }
 }
