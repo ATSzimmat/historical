@@ -2,13 +2,35 @@
 % Please edit documentation in R/hist_contain.R
 \name{hist_contain}
 \alias{hist_contain}
-\title{Title}
+\title{Filter the source dataframe by the occurrence of different words}
 \usage{
 hist_contain(data, ...)
 }
 \arguments{
-\item{...}{}
+\item{data}{A dataframe (from \code{hist_sources}) with a \code{text} column to be filtered and output_text = FALSE in the hist_sources function.}
+}
+\value{
+... One or more character strings to search for. Use \code{+} to require multiple words in the same text (e.g., \code{"king+battle"}). Multiple arguments represent an OR condition.
+
+A filtered dataframe containing only the rows where the text column matches the given word criteria.
 }
 \description{
-Title
+Filter the source dataframe by the occurrence of different words
+}
+\examples{
+# Example source dataframe created with hist_sources
+Xenophon_Corinthian <- hist_sources(author="Xenophon",context="Corinthian War", output_text = FALSE)
+
+# Filter a source dataframe for sources that contain one specific word, e.g., "king"
+Xenophon_Corinthian \%>\% hist_contain("king")
+# Filter a source dataframe for sources that contain several specific words together, e.g. "king", "battle" and "Thebans"
+Xenophon_Corinthian \%>\% hist_contain("king+battle+Thebans")
+# Filter a source dataframe for sources where either a specific word or another specific word occurs, e.g., "king" or "Thebans"
+Xenophon_Corinthian \%>\% hist_contain("king","Thebans")
+# Filter a source dataframe for sources where e.g. either a specific word or two specific word thogether occur, e.g., "king+battle" or "Thebans"
+Xenophon_Corinthian \%>\% hist_contain("king+battle","Thebans")
+
+After using hist_cotain you will receive your filtered source dataframe, which you can further edit or convert to a source paper using hist_text
+Xenophon_filtered <- Xenophon_Corinthian \%>\% hist_contain("king+battle","Thebans")
+Xenophon_filtered \%>\% hist_text()
 }
