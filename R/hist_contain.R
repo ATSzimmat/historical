@@ -5,10 +5,6 @@
 #' @return A filtered dataframe containing only the rows where the text column matches the given word criteria.
 #' @export
 #'
-#' @importFrom magrittr %>%
-#' @importFrom dplyr filter
-#' @importFrom stringr str_detect fixed
-#'
 #' @examples
 #' # Example source dataframe created with hist_sources
 #' Xenophon_Corinthian <- hist_sources(author="Xenophon",context="Corinthian War", output_text = FALSE)
@@ -30,11 +26,16 @@ hist_contain <- function(data, ...) {
   make_filter <- function(entry) {
     if (grepl("\\+", entry)) {
       sub_words <- strsplit(entry, "\\+")[[1]]
-      return(function(txt) all(str_detect(txt, fixed(sub_words, ignore_case = TRUE))))
+      return(function(txt) all(stringr::str_detect(txt, stringr::fixed(sub_words, ignore_case = TRUE))))
     } else {
-      return(function(txt) str_detect(txt, fixed(entry, ignore_case = TRUE)))}}
+      return(function(txt) stringr::str_detect(txt, stringr::fixed(entry, ignore_case = TRUE)))
+    }
+  }
   filters <- lapply(words, make_filter)
-  result <- data %>%
-    filter(sapply(text, function(txt) any(sapply(filters, function(word_list)
-      word_list(txt)))))
-  return(result)}
+  filtered_rows <- sapply(data$text, function(txt) {
+    any(sapply(filters, function(word_list) word_list(txt)))
+  })
+  result <- dplyr::filter(data, filtered_rows)
+  return(result)
+}
+
