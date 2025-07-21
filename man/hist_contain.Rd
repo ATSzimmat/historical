@@ -30,7 +30,7 @@ Xenophon_Corinthian \%>\% hist_contain("king","Thebans")
 # Filter a source dataframe for sources where e.g. either a specific word or two specific word thogether occur, e.g., "king+battle" or "Thebans"
 Xenophon_Corinthian \%>\% hist_contain("king+battle","Thebans")
 
-After using hist_cotain you will receive your filtered source dataframe, which you can further edit or convert to a source paper using hist_text
+# After using hist_cotain you will receive your filtered source dataframe, which you can further edit or convert to a source paper using hist_text
 Xenophon_filtered <- Xenophon_Corinthian \%>\% hist_contain("king+battle","Thebans")
 Xenophon_filtered \%>\% hist_text()
 }
