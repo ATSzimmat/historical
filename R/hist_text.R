@@ -1,6 +1,6 @@
 #' Output the source-paper
 #'
-#' @param filtered_sources
+#' @param filtered_sources Automatisch von hist_sources generierter Platzhaltername für das source dataframe
 #'
 #' @returns The rendered text of the sources of the respective source dataframe (so the source-paper)
 #' @export
