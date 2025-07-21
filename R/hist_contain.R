@@ -1,6 +1,6 @@
 #' Filter the source dataframe by the occurrence of different words
 #'
-#' @param "words" (The words for which the source dataframe should be filtered)
+#' @param "words" - The words for which the source dataframe should be filtered
 #' @returns the filtered source dataframe
 #' @export
 #'
