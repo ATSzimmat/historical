@@ -13,6 +13,7 @@ BugReports: https://github.com/ATSzimmat/historical/issues
 Imports: 
     dplyr,
     glue,
+    readr,
     stringr
 Depends: 
     R (>= 3.5)
