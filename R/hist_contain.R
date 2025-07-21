@@ -5,6 +5,8 @@
 #' @return A filtered dataframe containing only the rows where the text column matches the given word criteria.
 #' @export
 #'
+#' @importFrom magrittr %>%
+#'
 #' @examples
 #' # Example source dataframe created with hist_sources
 #' Xenophon_Corinthian <- hist_sources(author="Xenophon",context="Corinthian War", output_text = FALSE)
