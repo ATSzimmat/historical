@@ -23,29 +23,30 @@ hist_sources <- function(
   filtered_sources <- source_data
 
   if (!is.null(author)) {
-    filtered_sources <- dplyr::filter(filtered_sources, author == author)
+    filtered_sources <- dplyr::filter(filtered_sources, .data$author == author)
   }
   if (!is.null(context)) {
-    filtered_sources <- dplyr::filter(filtered_sources, context == context)
+    filtered_sources <- dplyr::filter(filtered_sources, .data$context == context)
   }
   if (!is.null(event_type)) {
-    filtered_sources <- dplyr::filter(filtered_sources, event_type == event_type)
+    filtered_sources <- dplyr::filter(filtered_sources, .data$event_type == event_type)
   }
   if (!is.null(event)) {
-    filtered_sources <- dplyr::filter(filtered_sources, event == event)
+    filtered_sources <- dplyr::filter(filtered_sources, .data$event == event)
   }
   if (!is.null(work)) {
-    filtered_sources <- dplyr::filter(filtered_sources, work == work)
+    filtered_sources <- dplyr::filter(filtered_sources, .data$work == work)
   }
   if (!is.null(citation)) {
-    filtered_sources <- dplyr::filter(filtered_sources, citation == citation)
+    filtered_sources <- dplyr::filter(filtered_sources, .data$citation == citation)
   }
 
   if (output_text) {
     output <- dplyr::mutate(
       filtered_sources,
       formatted = glue::glue("{text_ID} – {citation}\n{trimws(text)}")
-    ) |> dplyr::pull(formatted)
+    ) |>
+      dplyr::pull(formatted)
     cat(paste(output, collapse = "\n\n"))
   } else {
     return(filtered_sources)
