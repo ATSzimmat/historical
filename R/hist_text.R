@@ -12,7 +12,9 @@
 #' Xenophon_Corinthian %>% hist_text()
 #'
 hist_text <- function(filtered_sources) {
-  output <- filtered_sources %>%
-    mutate(formatted = glue("{text_ID} – {citation}\n{trimws(text)}")) %>%
-    pull(formatted)
-  cat(paste(output, collapse = "\n\n"))}
+  formatted <- glue::glue(
+    "{filtered_sources$text_ID} – {filtered_sources$citation}\n{trimws(filtered_sources$text)}"
+  )
+  cat(paste(formatted, collapse = "\n\n"))
+}
+
